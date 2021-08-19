@@ -6,12 +6,6 @@ const { contactsList, updateContacts } = require("./module/module");
 
 const contactsPath = path.join(__dirname, "./db/contacts.json");
 
-/*
- * Раскомментируй и запиши значение
- * const contactsPath = ;
- */
-
-// TODO: задокументировать каждую функцию
 const listContacts = async () => {
   try {
     const contacts = await contactsList(contactsPath);

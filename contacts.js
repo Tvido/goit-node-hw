@@ -18,8 +18,8 @@ const listContacts = async () => {
 
 const getContactById = async (contactId) => {
   try {
-    const contsctsList = await contactsList(contactsPath);
-    const selectContact = contsctsList.find(
+    const contactsList = await contactsList(contactsPath);
+    const selectContact = contactsList.find(
       (item) => String(item.id) === String(contactId)
     );
     if (!selectContact) {
@@ -34,19 +34,19 @@ const getContactById = async (contactId) => {
 
 const removeContact = async (contactId) => {
   try {
-    const contsctsList = await contactsList(contactsPath);
-    const idx = contsctsList.findIndex(
+    const contactsList = await contactsList(contactsPath);
+    const idx = contactsList.findIndex(
       (item) => String(item.id) === String(contactId)
     );
     if (!idx === -1) {
       throw new Error("There is no product with this id");
     }
-    const newContacts = contsctsList.filter(
+    const newContacts = contactsList.filter(
       (item) => String(item.id) !== String(contactId)
     );
     await updateContacts(newContacts, contactsPath);
     console.table(newContacts);
-    return contsctsList[idx];
+    return contactsList[idx];
   } catch (error) {
     throw error;
   }
@@ -54,7 +54,7 @@ const removeContact = async (contactId) => {
 
 const addContact = async (name, email, phone) => {
   try {
-    const contsctsList = await contactsList(contactsPath);
+    const contactsList = await contactsList(contactsPath);
     const newContact = {
       id: v4(),
       name: name,
@@ -62,7 +62,7 @@ const addContact = async (name, email, phone) => {
       phone: phone,
     };
 
-    const newContactsList = [...contsctsList, newContact];
+    const newContactsList = [...contactsList, newContact];
     await updateContacts(newContactsList, contactsPath);
 
     console.table(newContact);
